@@ -13,7 +13,7 @@ server {
 
 <%= scope.function_template(['nginx/vhost/_servername.conf.erb']) %>
 
-  access_log  /var/log/nginx/<%= srvname %>.access.log;
+  access_log  /var/log/nginx/<%= srvname %>.access.log json_log_format;
 
   #location / {
   #  root   /var/www/<%= srvname %>;

@@ -1,4 +1,4 @@
 <%# Configuration fragment for logging %>
 
-  access_log  /var/log/nginx/<%= srvname %>.access.log;
+  access_log  /var/log/nginx/<%= srvname %>.access.log json_log_format;
   error_log   /var/log/nginx/<%= srvname %>.error.log;

@@ -2,7 +2,7 @@
 # will happen.
 #
 <% if @upstream_server.length > 1 -%>
-upstream upstreams {
+upstream upstreams_<%= @servername %> {
   <% @upstream_server.each do |server| -%>
     server <%= server %> max_fails=2 fail_timeout=10;
   <% end -%>

@@ -11,10 +11,20 @@ server {
   access_log  /var/log/nginx/<%= srvname %>.access.log json_log_format;
   <%= scope.function_template(['nginx/vhost/_logging.conf.erb']) %>
 
+
+
+<% if @lua_shared_dict -%>
+<% if @port == 81 -%>
+<%= scope.function_template(['nginx/lua-admin.conf']) %>
+<% else -%>
+<%= scope.function_template(['nginx/lua-server.conf']) %>
+<% end -%>
+<% else -%>
   location / {
     root <%= docroot %>;
     <%= scope.function_template(['nginx/vhost/_index.conf.erb']) %>
   }
+<% end -%>
 
   # Anything here is added by use of "magic" so is pretty jazzy.
   <%= magic %>

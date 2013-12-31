@@ -1,6 +1,13 @@
 # This vhost is managed by puppet, do not mess with it, terrible terrible things
 # will happen.
 #
+<% if @upstream_server.length > 1 -%>
+upstream upstreams_<%= @servername %> {
+  <% @upstream_server.each do |server| -%>
+    server <%= server %> max_fails=2 fail_timeout=10;
+  <% end -%>
+}
+<% end -%>
 
 server {
 

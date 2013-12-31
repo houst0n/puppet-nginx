@@ -17,7 +17,7 @@ class nginx::params {
   case $operatingsystem {
     'debian',
     'ubuntu': {
-        $package         = 'nginx'
+        $package         = 'nginx-extras'
         $service         = 'nginx'
         $restart         = '/usr/sbin/nginx -t && /etc/init.d/nginx reload'
         $hasrestart      = true

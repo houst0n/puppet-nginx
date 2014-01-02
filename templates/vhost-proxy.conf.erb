@@ -20,9 +20,9 @@ server {
     open_log_file_cache     max=1000 inactive=20s min_uses=2 valid=1m;
 <% if @lua_shared_dict -%>
 <% if @port == 81 -%>
-<%= scope.function_file(['nginx/lua-admin.conf']) %>
+<%= scope.function_template(['nginx/lua-admin.conf']) %>
 <% else -%>
-<%= scope.function_file(['nginx/lua-server.conf']) %>
+<%= scope.function_template(['nginx/lua-server.conf']) %>
 <% end -%>
 <% else -%>
 <%= scope.function_template(['nginx/vhost/_proxy.conf.erb']) %>

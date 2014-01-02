@@ -23,7 +23,8 @@ define nginx::vhost(
   $isdefaultvhost   = false,
   $vhostroot        = '',
   $autoindex        = false,
-  $webroot          = $nginx::server::default_webroot
+  $webroot          = $nginx::server::default_webroot,
+  $lua_shared_dict  = $nginx::server::lua_shared_dict,
 ) {
 
   include nginx

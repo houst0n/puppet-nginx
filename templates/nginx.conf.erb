@@ -55,8 +55,8 @@ http {
   ##
 
   <% if @add_header -%>
-    <% @add_header.each do |k,v| %>
-      add_header <%= k %> <%= v %>;
+  <% @add_header.each do |k,v| %>
+  add_header <%= k %> <%= v %>;
   <% end end -%>
 
   ##

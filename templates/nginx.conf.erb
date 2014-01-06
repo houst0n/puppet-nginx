@@ -54,8 +54,8 @@ http {
   # Custom headers added as parameters
   ##
 
-  <% if @include_headers -%>
-    <% @include_headers.each do |k,v| %>
+  <% if @add_header -%>
+    <% @add_header.each do |k,v| %>
       add_header <%= k %> <%= v %>;
   <% end end -%>
 

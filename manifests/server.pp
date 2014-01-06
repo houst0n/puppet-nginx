@@ -18,7 +18,7 @@ class nginx::server (
   $serveradmin                   = 'root@localhost',
   $default_webroot               = $nginx::params::default_webroot,
   $lua_shared_dict               = undef,
-  $add_headers                   = undef,
+  $add_header                    = undef,
 ) inherits nginx::params {
 
   include nginx

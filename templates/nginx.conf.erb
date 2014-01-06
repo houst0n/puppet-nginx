@@ -51,11 +51,13 @@ http {
   error_log /var/log/nginx/error.log;
 
   ##
-  # Headers required by pen testing
-  # https://hmrcmytax.atlassian.net/browse/HMTB-2547
+  # Custom headers added as parameters
   ##
-  add_header X-Frame-Options DENY;
-  add_header X-Content-Type-Options nosniff;
+
+  <% if @add_header -%>
+  <% @add_header.each do |k,v| %>
+  add_header <%= k %> <%= v %>;
+  <% end end -%>
 
   ##
   # Gzip Settings

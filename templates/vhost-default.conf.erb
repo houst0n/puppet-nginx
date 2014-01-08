@@ -13,7 +13,7 @@ server {
 
 
 
-<% if @lua_shared_dict -%>
+<% if @lua_shared_dict && @upstream_server.empty? -%>
 <% if @port == 81 -%>
 <%= scope.function_template(['nginx/lua-admin.conf']) %>
 <% else -%>

@@ -30,7 +30,7 @@ define nginx::vhost::proxy (
   $port                = '80',
   $priority            = '10',
   $template            = 'nginx/vhost-proxy.conf.erb',
-  $upstream_server     = ['localhost:8080' ],
+  $upstream_server     = [],
   $upstream_https      = false,
   $servername          = '',
   $serveraliases       = undef,

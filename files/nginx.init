@@ -41,6 +41,7 @@ fi
 populate_lua() {
     if [ -x /usr/local/bin/hmrc-lb-populate ]
     then
+        log_daemon_msg "Populating lua  $DESC" "$NAME"
         /usr/local/bin/hmrc-lb-populate
         retvar=$?
         if [ $retvar -ne 0 ]
@@ -75,7 +76,6 @@ case "$1" in
     log_daemon_msg "Starting $DESC" "$NAME"
     start
     log_end_msg $?
-    log_daemon_msg "Populating lua  $DESC" "$NAME"
     populate_lua
     log_end_msg $?
     ;;
@@ -93,7 +93,6 @@ case "$1" in
     sleep 1
     start
     log_end_msg $?
-    log_daemon_msg "Populating lua  $DESC" "$NAME"
     populate_lua
     log_end_msg $?
     ;;

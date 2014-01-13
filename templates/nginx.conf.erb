@@ -52,9 +52,9 @@ http {
   error_log /var/log/nginx/error.log;
 
   ##
-  # Hide the fact we use nginx
+  # Hide the nginx version number from the Server heading
   ##
-  more_set_headers    "Server: webserver";
+  server_tokens off;
 
   ##
   # Custom headers added as parameters

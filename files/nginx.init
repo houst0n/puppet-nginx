@@ -39,9 +39,9 @@ if [ -n "$ULIMIT" ]; then
 fi
 
 populate_lua() {
-    if [ -x add_path_to_script ]
+    if [ -x /usr/local/bin/hmrc-lb-populate ]
     then
-        add_path_to_script
+        /usr/local/bin/hmrc-lb-populate
         retvar=$?
         if [ $retvar -ne 0 ]
         then

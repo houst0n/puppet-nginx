@@ -52,6 +52,11 @@ http {
   error_log /var/log/nginx/error.log;
 
   ##
+  # Hide the fact we use nginx
+  ##
+  more_set_headers    "Server: webserver";
+
+  ##
   # Custom headers added as parameters
   ##
 

@@ -44,6 +44,15 @@ class nginx::server (
     subscribe  => Package['nginx'],
   }
 
+  # Replace the init script to optionally run the lb populate on restart
+  file { '/etc/init.d/nginx':
+      owner   => 'root',
+      mode    => '0744',
+      source  => 'puppet:///modules/nginx/nginx.init',
+      notify  => Service['nginx'],
+      require => Package['nginx'];
+  }
+
   # All the files, stolen from debian, hence this being debian
   # specific at the minute.
   file {

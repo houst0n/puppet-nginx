@@ -4,7 +4,6 @@
   <% if @upstream_https then $http_type='https' else $http_type='http' end -%>
         proxy_pass                 <%= $http_type %>://<% if @upstream_server.length == 1 -%><%= @upstream_server.first %><% else -%>upstreams_<%=@servername %><% end -%>;
   <% if @ssl_redirect -%>
-        proxy_redirect http:// https://;
         if ($scheme = 'http') {
           rewrite ^ https://$host$request_uri? permanent;
         }

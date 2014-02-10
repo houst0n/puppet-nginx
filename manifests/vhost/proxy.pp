@@ -48,6 +48,7 @@ define nginx::vhost::proxy (
   $set_host_header     = undef,
   $client_max_body_size = '10m',
   $lua_shared_dict  = $nginx::server::lua_shared_dict,
+  $user_agent          = undef,
 ) {
 
   include nginx

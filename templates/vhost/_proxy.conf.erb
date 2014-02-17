@@ -14,7 +14,7 @@
         proxy_set_header           X-Forwarded-Server  $host;
         proxy_set_header           X-Forwarded-Host  $host;
   <% if @user_agent -%>
-        proxy_set_header           User-Agent  Host  '<%= @user_agent %>';
+        proxy_set_header           User-Agent '<%= @user_agent %>';
   <% end -%>
   <% if @forward_host_header -%>
         proxy_set_header           Host  $host;

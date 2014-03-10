@@ -27,28 +27,30 @@
 #  class { 'nginx::cache': port => 80 , upstream_port 8080 }
 #
 define nginx::vhost::proxy (
-  $port                = '80',
-  $priority            = '10',
-  $template            = 'nginx/vhost-proxy.conf.erb',
-  $upstream_server     = [],
-  $upstream_https      = false,
-  $servername          = '',
-  $serveraliases       = undef,
-  $ssl                 = false,
-  $sslonly             = false,
-  $ssl_port            = '443',
-  $ssl_path            = $nginx::server::default_ssl_path,
-  $ssl_cert            = $nginx::server::default_ssl_cert,
-  $ssl_key             = $nginx::server::default_ssl_key,
-  $ssl_redirect        = false,
-  $magic               = '',
-  $isdefaultvhost      = false,
-  $proxy               = true,
-  $forward_host_header = true,
-  $set_host_header     = undef,
   $client_max_body_size = '10m',
-  $lua_shared_dict  = $nginx::server::lua_shared_dict,
-  $user_agent          = undef,
+  $forward_host_header  = true,
+  $isdefaultvhost       = false,
+  $default_log_format   = $nginx::params::default_log_format,
+  $log_request_body     = false,
+  $lua_shared_dict      = $nginx::server::lua_shared_dict,
+  $magic                = '',
+  $port                 = '80',
+  $priority             = '10',
+  $proxy                = true,
+  $serveraliases        = undef,
+  $servername           = '',
+  $set_host_header      = undef,
+  $ssl                  = false,
+  $ssl_cert             = $nginx::server::default_ssl_cert,
+  $ssl_key              = $nginx::server::default_ssl_key,
+  $ssl_path             = $nginx::server::default_ssl_path,
+  $ssl_port             = '443',
+  $ssl_redirect         = false,
+  $sslonly              = false,
+  $template             = 'nginx/vhost-proxy.conf.erb',
+  $upstream_https       = false,
+  $upstream_server      = [],
+  $user_agent           = undef,
 ) {
 
   include nginx
@@ -61,14 +63,14 @@ define nginx::vhost::proxy (
   }
 
   if ($set_host_header and $forward_host_header) {
-    fail("Cannot use both set_host_header and forward_host_header!")
+    fail('Cannot use both set_host_header and forward_host_header!')
   }
 
   file { "${nginx::params::vdir}/${priority}-${name}_proxy":
     content => template($template),
     owner   => 'root',
     group   => '0',
-    mode    => '755',
+    mode    => '0755',
     require => Package['nginx'],
     notify  => Service['nginx'],
   }

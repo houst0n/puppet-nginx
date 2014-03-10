@@ -21,7 +21,7 @@ server {
 
   root <%= rootpath %><% if gunicorn != true %>/public<% end %>;
 
-  access_log  /var/log/nginx/<%= srvname %>.access.log json_log_format;
+  access_log  /var/log/nginx/<%= srvname %>.access.log <%= @default_log_format %>;
   error_log   /var/log/nginx/<%= srvname %>.error.log;
 
 

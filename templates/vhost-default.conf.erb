@@ -8,7 +8,7 @@ server {
 
 <%= scope.function_template(['nginx/vhost/_listen.conf.erb']) %>
 
-  access_log  /var/log/nginx/<%= srvname %>.access.log json_log_format;
+  access_log  /var/log/nginx/<%= srvname %>.access.log <%= @default_log_format %>;
   <%= scope.function_template(['nginx/vhost/_logging.conf.erb']) %>
 
 

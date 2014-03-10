@@ -20,7 +20,7 @@ server {
     # keep error pages local?
     # error_page              500 502 503 504 /50x.html;
 
-    access_log              /var/log/nginx/cache_access.log json_log_format;
+    access_log              /var/log/nginx/cache_access.log <%= @default_log_format %>;
     error_log               /var/log/nginx/cache_error.log;
     open_log_file_cache     max=1000 inactive=20s min_uses=2 valid=1m;
     log_format cache '***$time_local '

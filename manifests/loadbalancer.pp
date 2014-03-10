@@ -39,7 +39,7 @@ define nginx::loadbalancer(
     content => template($template),
     owner   => 'root',
     group   => '0',
-    mode    => '644',
+    mode    => '0644',
     require => Package['nginx'],
     notify  => Service['nginx'],
   }

@@ -30,7 +30,7 @@ define nginx::php (
   include nginx
   include nginx::params
 
-  if $operatingsystem != 'Debian' {
+  if $::operatingsystem != 'Debian' {
     err("Nginx php only works on debian currently.")
     fail("Nginx php need debian.")
   }

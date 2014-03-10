@@ -1,24 +1,15 @@
 # Class: nginx
 #
-#   class description goes here.
-#
-# Parameters:
-#
-# Actions:
-#
-# Requires:
+#   Installs the `nginx` package for supported operating systems.
 #
 # Sample Usage:
 #
+#   class { 'nginx': }
+#
 class nginx {
-
   include nginx::params
 
   if ! $nginx::params::package {
-    fail( "No nginx possible on ${hostname}" )
+    fail( "No nginx package defined for ${::hostname}" )
   }
-
-  # We should monitor the state of nignx, though I am not sure this should be here
-  if defined(Class['munin'])  { include metrics::munin::nginx }
-
 }

@@ -24,11 +24,6 @@ class nginx::server (
   include nginx
   include nginx::params
 
-  # Platform specific server setup items
-  case $operatingsystem {
-    'debian': { include nginx::server::debian }
-  }
-
   package{ 'nginx':
     ensure => present,
     name   => $nginx::params::package,
@@ -62,12 +57,19 @@ class nginx::server (
       purge   => true,
       notify  => Service['nginx'],
       require => Package['nginx'];
+
     "${nginx::params::etcdir}/nginx.conf":
       content => template( 'nginx/nginx.conf.erb' ),
       owner   => 'root',
       mode    => '0644',
       notify  => Service['nginx'],
       require => Package['nginx'];
-  }
 
+    "${nginx::params::etcdir}/log_formats":
+      ensure  => directory,
+      owner   => 'root',
+      mode    => '0644',
+      notify  => Service['nginx'],
+      require => Package['nginx'];
+  }
 }

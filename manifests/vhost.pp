@@ -45,6 +45,20 @@ define nginx::vhost(
     $docroot = $vhostroot
   }
 
+  exec { 'create docroot':
+    command => "mkdir -p ${docroot} && chown ${nginx::params::user} ${docroot}",
+    unless  => "test -d ${docroot}",
+    require => Class['nginx::server'],
+  }
+
+  file { $docroot:
+    ensure  => present,
+    owner   => $nginx::params::user,
+    group   => $nginx::params::user,
+    mode    => '0755',
+    require => Exec['create docroot'],
+  }
+
   # Write the nginx configuration
   file { "${nginx::params::vdir}/${priority}-${name}":
     content => template($template),

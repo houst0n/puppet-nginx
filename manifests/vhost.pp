@@ -49,12 +49,14 @@ define nginx::vhost(
       require => Class['nginx::server'],
     }
 
-    file { $vhostroot:
-      ensure  => present,
-      owner   => $nginx::params::user,
-      group   => $nginx::params::user,
-      mode    => '0755',
-      require => Exec['create vhostroot'],
+    if ! defined(File[$vhostroot]) {
+      file { $vhostroot:
+        ensure  => present,
+        owner   => $nginx::params::user,
+        group   => $nginx::params::user,
+        mode    => '2755',
+        require => Exec['create vhostroot'],
+      }
     }
   }
 

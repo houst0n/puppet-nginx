@@ -43,13 +43,16 @@ define nginx::vhost(
     $docroot = "${webroot}/${srvname}"
   } else {
     $docroot = $vhostroot
-    exec { 'create vhostroot':
-      command => "mkdir -p ${vhostroot} && chown ${nginx::params::user} ${vhostroot}",
-      unless  => "test -d ${vhostroot}",
-      require => Class['nginx::server'],
+
+    unless defined(Exec['create vhostroot']) {
+      exec { 'create vhostroot':
+        command => "mkdir -p ${vhostroot} && chown ${nginx::params::user} ${vhostroot}",
+        unless  => "test -d ${vhostroot}",
+        require => Class['nginx::server'],
+      }
     }
 
-    if ! defined(File[$vhostroot]) {
+    unless defined(File[$vhostroot]) {
       file { $vhostroot:
         ensure  => present,
         owner   => $nginx::params::user,
